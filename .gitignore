@@ -1,0 +1,38 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+.out/
+.next/
+coverage/
+
+# Dependency caches
+pnpm-lock.yaml
+package-lock.json
+
+# Environment files
+.env
+.env.*           
+
+# Logs
+*.log
+logs/
+*.pid
+*.seed
+*.pid.lock
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/
+*.code-workspace
+
+# Docker files
+**/docker/cache/
