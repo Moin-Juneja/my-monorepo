@@ -2,9 +2,7 @@ name: Monorepo CI
 
 on:
   push:
-    branches:
-      - main
-      - develop
+    branches: [main, develop]
   pull_request:
 
 jobs:
@@ -18,11 +16,16 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 22  # Recommended version for Vite/React/Nest
           cache: 'npm'
 
-      - name: Install dependencies (root, workspaces)
-        run: npm install
+      - name: Remove node_modules & package-lock
+        run: |
+          rm -rf node_modules */node_modules
+          rm -f package-lock.json */package-lock.json
+
+      - name: Install dependencies (workspaces)
+        run: npm install --force
 
       - name: Build frontend
         run: npm run build --workspace frontend
