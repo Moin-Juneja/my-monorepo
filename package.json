@@ -11,7 +11,8 @@
     "start:backend": "npm run start --workspace backend",
     "docker:build:frontend": "cd frontend && docker build -t frontend:v1 .",
     "docker:build:backend": "cd backend && docker build -t backend:v1 .",
-    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\""
+    "start:backend:dev": "npm --workspace backend run start:dev",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend:dev\""
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
