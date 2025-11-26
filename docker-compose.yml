@@ -18,6 +18,7 @@ services:
       DB_USER: postgres
       DB_PASSWORD: password
       DB_NAME: postgres
+      RUN_MIGRATIONS: "false"  
     depends_on:
       db:
         condition: service_healthy

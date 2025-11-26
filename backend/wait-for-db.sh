@@ -11,8 +11,12 @@ until pg_isready -h "$host" -U "postgres"; do
   sleep 2
 done
 
-echo "Postgres is up - running migrations..."
-npx drizzle-kit migrate
+if [ "$RUN_MIGRATIONS" = "true" ]; then
+  echo "Postgres is up - running migrations..."
+  npx drizzle-kit migrate
+else
+  echo "Postgres is up - skipping migrations (hybrid mode)"
+fi
 
 echo "Starting backend..."
 exec $cmd

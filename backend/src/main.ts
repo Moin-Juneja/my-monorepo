@@ -16,13 +16,13 @@ async function bootstrap() {
   ];
 
   // Check if data already exists
-  const existing = await db.select().from(users);
-  if (existing.length === 0) {
-    await db.insert(users).values(sampleUsers);
-    console.log('Sample users inserted into DB!');
-  } else {
-    console.log('ℹUsers already exist, skipping insert.');
-  }
+  // const existing = await db.select().from(users);
+  // if (existing.length === 0) {
+  //   await db.insert(users).values(sampleUsers);
+  //   console.log('Sample users inserted into DB!');
+  // } else {
+  //   console.log('ℹUsers already exist, skipping insert.');
+  // }
 
   await app.listen(3000);
 }
