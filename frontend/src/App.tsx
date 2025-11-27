@@ -220,7 +220,7 @@ function App() {
         <div className="card bg-base-100 shadow-xl mb-6">
           <div className="card-body">
             <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
-              <h1 className="card-title text-3xl font-bold text-base-content">User Management</h1>
+              <h1 className="card-title text-3xl font-bold text-base-content">User Managements</h1>
               <div className="flex flex-wrap gap-2">
                 <button 
                   className="btn btn-outline btn-info"
