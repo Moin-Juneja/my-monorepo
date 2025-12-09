@@ -16,8 +16,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22  # Recommended version for Vite/React/Nest
-          cache: 'npm'
+          node-version: 22
+          cache: npm
 
       - name: Remove node_modules & package-lock
         run: |
@@ -32,3 +32,13 @@ jobs:
 
       - name: Build backend
         run: npm run build --workspace backend
+
+      # --- SonarCloud Analysis ---
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.organization=${{ secrets.SONAR_ORG }}
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}

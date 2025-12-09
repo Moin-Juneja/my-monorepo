@@ -3,7 +3,7 @@ services:
     build: ./frontend
     container_name: vpop-frontend
     ports:
-      - "5173:5173"
+      - "4173:4173"
     depends_on:
       - backend
 
@@ -11,14 +11,16 @@ services:
     build: ./backend
     container_name: vpop-backend
     ports:
-      - "3000:3000"
+      - "4000:4000"
     environment:
       DB_HOST: db
       DB_PORT: 5432
       DB_USER: postgres
       DB_PASSWORD: password
       DB_NAME: postgres
-      RUN_MIGRATIONS: "false"  
+      RUN_MIGRATIONS: "true"  
+    volumes:
+    - ./backend/drizzle:/app/drizzle   
     depends_on:
       db:
         condition: service_healthy

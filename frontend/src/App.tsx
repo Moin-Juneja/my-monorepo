@@ -19,7 +19,7 @@ function App() {
   });
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const API_BASE_URL = 'http://localhost:3000';
+  const API_BASE_URL = 'http://localhost:4000';
 
   useEffect(() => {
     fetchUsers();
