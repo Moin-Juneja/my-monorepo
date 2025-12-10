@@ -27,6 +27,22 @@ jobs:
       - name: Install dependencies (workspaces)
         run: npm install --force
 
+      # -----------------------------
+      # PLAYWRIGHT TESTS + COVERAGE
+      # -----------------------------
+
+      - name: Install Playwright Browsers
+        working-directory: frontend
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests with coverage
+        working-directory: frontend
+        run: npm run test:coverage
+
+      # -----------------------------
+      # BUILD PROJECTS
+      # -----------------------------
+
       - name: Build frontend
         run: npm run build --workspace frontend
 
