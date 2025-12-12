@@ -28,16 +28,11 @@ jobs:
         run: npm install --force
 
       # -----------------------------
-      # PLAYWRIGHT TESTS + COVERAGE
+      # JEST TESTS + COVERAGE
       # -----------------------------
-
-      - name: Install Playwright Browsers
+      - name: Run frontend tests with coverage
         working-directory: frontend
-        run: npx playwright install --with-deps
-
-      - name: Run Playwright tests with coverage
-        working-directory: frontend
-        run: npm run test:coverage
+        run: npm test -- --coverage --watchAll=false
 
       # -----------------------------
       # BUILD PROJECTS
@@ -55,6 +50,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
+          projectBaseDir: .
           args: >
             -Dsonar.organization=${{ secrets.SONAR_ORG }}
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
