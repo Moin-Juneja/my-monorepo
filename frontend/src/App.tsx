@@ -309,7 +309,7 @@ function App() {
                               value={formData.name}
                               onChange={(e) => handleInputChange('name', e.target.value)}
                               className="input input-bordered input-sm w-full"
-                              placeholder="Enter name"
+                              placeholder="Enter username"
                             />
                           ) : (
                             <span className="font-medium">{user.name}</span>

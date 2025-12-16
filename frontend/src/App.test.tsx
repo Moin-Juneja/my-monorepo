@@ -75,7 +75,7 @@ describe("App Component Tests", () => {
     const addBtn = screen.getByRole("button", { name: /Add User/i });
     fireEvent.click(addBtn);
 
-    expect(screen.getByPlaceholderText("Enter name")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Enter username")).toBeInTheDocument();
   });
 
   // -----------------------------
@@ -120,7 +120,7 @@ describe("App Component Tests", () => {
 
     fireEvent.click(screen.getAllByText("Edit")[0]);
 
-    fireEvent.change(screen.getByPlaceholderText("Enter name"), {
+    fireEvent.change(screen.getByPlaceholderText("Enter username"), {
       target: { value: "John Updated" },
     });
 
