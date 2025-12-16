@@ -18,22 +18,23 @@ export class AppController {
         success: true,
         data: result,
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         success: false,
         error: error.message,
       };
     }
   }
+
   @Post('createUser')
-  async createUser(@Body() createUserDto: any): Promise<any> {
+  async createUser(@Body() createUserDto: any) {
     try {
       const result = await this.appService.createUser(createUserDto);
       return {
         success: true,
         data: result[0], // returning() returns an array
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         success: false,
         error: error.message,
@@ -53,9 +54,9 @@ export class AppController {
       }
       return {
         success: true,
-        data: result[0], // returning() returns an array
+        data: result[0],
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         success: false,
         error: error.message,
@@ -71,7 +72,7 @@ export class AppController {
         success: true,
         message: 'User deleted successfully',
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         success: false,
         error: error.message,
