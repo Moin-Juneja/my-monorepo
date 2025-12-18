@@ -37,6 +37,10 @@ jobs:
         working-directory: frontend
         run: npm test -- --coverage --watchAll=false
 
+      - name: Run backend tests with coverage
+        working-directory: backend
+        run: npm run test:cov
+
       # -----------------------------
       # BUILD PROJECTS
       # -----------------------------
