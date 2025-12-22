@@ -4,10 +4,39 @@ on:
   push:
     branches: [main, develop]
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, closed]
 
 jobs:
-  build:
+  sonar_scan:
+    name: Sonar Scan on Push
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: .
+          args: >
+            -Dsonar.organization=${{ secrets.SONAR_ORG }}
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+
+  build_test_deploy:
+    name: Full CI After Merge
+    # Runs ONLY when PR is merged
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
@@ -31,33 +60,21 @@ jobs:
         run: npm install --force
 
       # -----------------------------
-      # JEST TESTS + COVERAGE
+      # TESTS + COVERAGE
       # -----------------------------
-      - name: Run frontend tests with coverage
+      - name: Run frontend tests
         working-directory: frontend
         run: npm test -- --coverage --watchAll=false
 
-      - name: Run backend tests with coverage
+      - name: Run backend tests
         working-directory: backend
         run: npm run test:cov
 
       # -----------------------------
-      # BUILD PROJECTS
+      # BUILD
       # -----------------------------
-
       - name: Build frontend
         run: npm run build --workspace frontend
 
       - name: Build backend
         run: npm run build --workspace backend
-
-      # --- SonarCloud Analysis ---
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          projectBaseDir: .
-          args: >
-            -Dsonar.organization=${{ secrets.SONAR_ORG }}
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
