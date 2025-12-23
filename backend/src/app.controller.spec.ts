@@ -34,8 +34,8 @@ describe('AppController (unit)', () => {
   });
 
   it('GET / → Hello World', () => {
-    service.getHello.mockReturnValue('Hello World!');
-    expect(controller.getHello()).toBe('Hello World!');
+    service.getHello.mockReturnValue('Hello Guys!');
+    expect(controller.getHello()).toBe('Hello Guys!');
   });
 
   it('GET /users → success', async () => {

@@ -81,7 +81,7 @@ describe("App Component Tests", () => {
   // -----------------------------
   // TEST 4: Edit → Save
   // -----------------------------
-  test("Edit → Save updates a row", async () => {
+  test("Edit → Save a row", async () => {
     // 1st fetch → load initial users
     (fetch as jest.Mock).mockResolvedValueOnce({
       ok: true,
